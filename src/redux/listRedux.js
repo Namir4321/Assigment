@@ -1,17 +1,17 @@
-import { AllUserFetch } from "./apicall";
+import { ALlProductList } from "./apicall";
 import { createSlice } from "@reduxjs/toolkit";
-const userSlice = createSlice({
-  name: "users/fetch",
+const productSlice = createSlice({
+  name: "product/fetch",
   initialState: {
-    users: [],
+    product: [],
     isFetching: false,
     error: null,
   },
   reducers: {
     logoutusers: (state) => {
-      localStorage.removeItem("user");
+      localStorage.removeItem("product");
       return {
-        users: [],
+        product: [],
         isFetching: false,
         error: null,
       };
@@ -19,21 +19,21 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(AllUserFetch.pending, (state) => {
+      .addCase(ALlProductList.pending, (state) => {
         state.isFetching = true;
         state.error = null;
       })
-      .addCase(AllUserFetch.fulfilled, (state, action) => {
-console.log([])
+      .addCase(ALlProductList.fulfilled, (state, action) => {
+console.log(action.payload)
         state.isFetching = false;
-        state.users = action.payload;
+        state.product = action.payload;
         state.error = null;
       })
-      .addCase(AllUserFetch.rejected, (state, action) => {
+      .addCase(ALlProductList.rejected, (state, action) => {
         state.isFetching = false;
         state.error = action.payload || "An unexpected error occurred";
       });
   },
 });
-export const { logoutusers } = userSlice.actions;
-export default userSlice.reducer;
+export const { logoutusers } = productSlice.actions;
+export default productSlice.reducer;

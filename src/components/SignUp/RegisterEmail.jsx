@@ -1,90 +1,105 @@
 import React, { useState } from "react";
 import { Input } from "../ui/input";
-import { FaUser } from "react-icons/fa";
-import { IoIosLock } from "react-icons/io";
+import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { RegisterCall } from "@/redux/apicall";
-import { NavLink } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 const RegisterEmail = () => {
   const [name, setName] = useState("");
-  const [dob, setDob] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const handleSubmit = async (e) => {
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const res = await RegisterCall({ name, dob, email, password });
-    console.log(res.error);
-    if (res.error) {
-      setError(res.error);
+
+    if (!name || !email || !password) {
+      setError("All fields are required!");
+      return;
     }
+
+  const res = await RegisterCall({ name,email, password });
+  console.log(res)
+      if (res.error) {
+        setError(res.payload || "Signup failed. Please try again.");
+      } else  {
+        setError("");
+       navigate("/");
+      }
   };
   return (
-    <div className="gap-4 grid  items-start">
-      <form onSubmit={handleSubmit} className="gap-4 grid items-start">
-        <div className="relative w-full">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-            <FaUser className="mx-1" />|
-          </div>
+    <div className="w-full  ">
+      <form className="w-full" onSubmit={handleSubmit}>
+        <div className="flex flex-col mb-2 w-full">
+          <Label className="flex justify-start mb-1 text-lg">
+            Enter your Name
+          </Label>
           <Input
-            className="pl-12 "
-            type="name"
-            placeholder="name"
+            id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your name"
+            className="h-10 border-[#424647] w-full"
           />
+          <p className="flex mt-1 text-[#B8B8B8] text-[12px]">
+            This name will be displayed with your inquiry{" "}
+          </p>
         </div>
-        <div className="relative w-full">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-            <FaUser className="mx-1" />|
-          </div>
+        <div className="flex flex-col mb-2 w-full">
+          <Label className="flex justify-start mb-1 text-lg">
+            Enter your email
+          </Label>
           <Input
-            className="pl-12 "
-            type="date"
-            placeholder="DOB"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
-          />
-        </div>
-        <div className="relative w-full">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-            <FaUser className="mx-1" />|
-          </div>
-          <Input
-            className="pl-12 "
+            id="email"
             type="email"
-            placeholder="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            className="h-10 border-[#424647] w-full"
           />
+          <p className="flex mt-1 text-[#B8B8B8] text-[12px]">
+            This email will be used for communication.
+          </p>
         </div>
-        <div className="relative w-full">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-            <IoIosLock className="mx-1" />|
-          </div>
+        <div className="flex flex-col mb-2 w-full">
+          <Label className="flex justify-start mb-1 text-lg">
+            Enter your password
+          </Label>
           <Input
-            className="pl-12"
+            id="password"
             type="password"
-            placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            className="h-10 border-[#424647] w-full"
           />
+          <p className="flex mt-1 text-[#B8B8B8] text-[12px]">
+            Make sure your password is secure.
+          </p>
         </div>
-        <p className=" text-xs flex mt-0 text-[#00f5e1] pt-0 mb-2">
-           Have an account
-          <NavLink className="mx-1 underline text-white" to="/login">
-            Login?
-          </NavLink>
-        </p>
         {error && (
-          <div className="flex justify-start text-red-500 m-0 p-0">
-            <p>{error}</p>
-          </div>
+          <p className="text-red-500 flex text-sm mb-4" role="alert">
+            {error}
+          </p>
         )}
-
-        <Button variant="default" className="bg-[#00f5e1]" type="submit">
-          Register
-        </Button>
+        <div className="flex z-12 mt-4">
+          <Button
+            variant="default"
+            size="lg"
+            className="text-[#CCF575] bg-gradient-to-br from-[#303030] to-[#141414] opacity-100"
+          >
+            Register
+          </Button>
+          <Button
+            variant="link"
+            className="bg-transparent hover:text-white hover:bg-transparent text-white ring-0 border-none shadow-none mx-2"
+          >
+            Already have an account?
+          </Button>
+        </div>
       </form>
     </div>
   );

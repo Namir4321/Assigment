@@ -1,33 +1,41 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import LoginEmail from "./LoginEmail";
-import AvatarPage from "./AvatarPage";
-
+import Navbar from "@/components/Navbar/Navbar";
+import Carsouel from "../SignUp/Carsouel";
+import image1 from "@/Image/singin.jpeg";
+import image2 from "@/Image/signintwo.png";
+import SignInCard from "./SigInCard";
+import image3 from "@/Image/signup.png";
+import image4 from "@/Image/signuptwo.png";
 const SignInPage = () => {
+  const ImagesNum = [image1, image2, image3, image4];
   return (
-    <div className="min-w-[350px] flex items-center justify-center   ">
-      <Card className="relative bg-[#1D2C4F]">
-        <CardHeader className="p-0 m-0">
-          <CardTitle className=" absolute z-20 -top-3 left-1/2 -translate-x-1/2 ">
-            <div className="bg-[#00f5e1] px-4 py-2 rounded-sm text-base ">
-              SIGN IN
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-0 m-0">
-          <AvatarPage className="p-0 m-0 " />
-        </CardContent>
-        <CardContent>
-          <LoginEmail />
-        </CardContent>
-      </Card>
+    <div className="w-full  relative">
+      {" "}
+     
+      <Navbar />
+      <div
+        className="w-[200px] h-[236px] fixed -bottom-8 -left-12 rounded-full z-0
+        bg-gradient-to-bl from-[#ccf557] to-[#000000] border-none
+        opacity-[43%] blur-3xl "
+      ></div>
+      <div
+        className="w-[200px] h-[236px] fixed top-8 -right-12 rounded-full z-0
+        bg-gradient-to-bl from-[#4F59A8] to-[#000000] border-none
+        opacity-[43%] blur-3xl "
+      ></div>
+      <div className="flex w-full h-full items-center  ">
+        {/* Left Section */}
+        <div className="hidden md:flex  w-1/2 h-full">
+          <div className=" max-w-[500px]  mt-12 w-full h-full ml-auto">
+            <Carsouel group="w-5/6" ImagesNum={ImagesNum} />{" "}
+          </div>
+        </div>
+        {/* Right Section */}
+
+        <div className="w-1/2  md:flex justify-center items-center">
+          <SignInCard />
+        </div>
+      </div>
     </div>
   );
 };

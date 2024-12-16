@@ -1,35 +1,40 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import AvatarPage from "./AvatarPage";
-import RegisterEmail from "./RegisterEmail";
+import SignupCard from "./SignupCard";
+import Carsouel from "./Carsouel";
+import Navbar from "@/components/Navbar/Navbar";
+import image1 from "@/Image/signup.png";
+import image2 from "@/Image/signuptwo.png";
 
 const SignUpPage = () => {
+  const ImagesNum = [image1, image2];
   return (
-    <div className="min-w-[350px] flex items-center justify-center ">
-      <Card className="relative bg-[#1D2C4F]">
-        <CardHeader className="p-0 m-0">
-          <CardTitle className=" absolute -top-3 left-1/2 -translate-x-1/2 z-20">
-            <div className="bg-[#00f5e1] z-20 px-4 py-2 rounded-sm text-base ">
-              SIGN UP
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-0 m-0">
-          <AvatarPage className="p-0 m-0 " />
-        </CardContent>
-        <CardContent>
-          <RegisterEmail />
-        </CardContent>
-      </Card>
+    <div className="w-full min-h-screen relative ">
+      <Navbar />
+      <div
+        className="w-[200px] h-[236px] fixed -bottom-8 -left-12 rounded-full z-0
+        bg-gradient-to-bl from-[#ccf557] to-[#000000] border-none
+        opacity-[43%] blur-3xl"
+      ></div>
+      <div className="flex w-full ">
+        {/* Left Section */}
+        <div className="w-1/2 flex justify-start items-center mx-[15px] md:mx-[65px] ">
+          <SignupCard />
+        </div>
+        {/* Right Section */}
+        <div className="w-1/2 hidden md:flex    justify-center items-center">
+          <div className="w-full max-h-[480px] mt-12   rounded-l-[15%] relative  overflow-hidden">
+            <div
+              className="w-[200px] h-[236px] fixed top-16 right-1/3 rounded-full z-0
+        bg-gradient-to-tl from-[#ccf557] to-[#b8ce77] border-none
+        opacity-[43%] blur-3xl"
+            ></div>
+
+            <Carsouel ImagesNum={ImagesNum}/>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default SignUpPage
+export default SignUpPage;
