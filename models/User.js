@@ -8,25 +8,16 @@ const UserSchema = new Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
+      // unique: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
     },
-    dob: {
-      type: Date,
-      required: true,
-    },
     password: {
       type: String,
       required: true,
-    },
-    image: {
-      type: String,
-      default:
-        "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=626&ext=jpg&ga=GA1.2.1235167379.1662527213&semt=ais",
     },
     tokens: [
       {

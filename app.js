@@ -3,7 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const AuthRoute=require("./routes/AuthRoute");
-const UsersRoute=require("./routes/UserRoute");
+const ProductRoute=require("./routes/UserRoute");
+const PdfRoute=require("./routes/PdfRoute");
 const session = require("express-session");
 const app = express();
 const cors = require("cors");
@@ -32,7 +33,10 @@ app.use(
   })
 );
 app.use("/api/auth",AuthRoute);
-app.use("/api/users", UsersRoute);
+app.use("/api/product", ProductRoute);
+app.use("/api/pdf", PdfRoute);
+
+
 
 app.listen(port, () => {
   console.log(`listning at port ${port}`);
